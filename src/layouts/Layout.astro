@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 type Props = {
   title: string;
@@ -19,16 +19,25 @@ const { title, description } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
     <script is:inline>
       try {
-        const storedTheme = localStorage.getItem('denis-theme');
-        const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const storedTheme = localStorage.getItem("denis-theme");
+        const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
         document.documentElement.dataset.theme = storedTheme || preferredTheme;
       } catch {
-        document.documentElement.dataset.theme = 'light';
+        document.documentElement.dataset.theme = "light";
       }
     </script>
   </head>

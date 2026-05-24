@@ -2,13 +2,9 @@
 import ContactSection from '../components/ContactSection.astro';
 import ExperienceSection from '../components/ExperienceSection.astro';
 import Hero from '../components/Hero.astro';
-import ImpactSection from '../components/ImpactSection.astro';
-import PrinciplesSection from '../components/PrinciplesSection.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import SkillsSection from '../components/SkillsSection.astro';
 import ValueSection from '../components/ValueSection.astro';
-import WorkShowcase from '../components/WorkShowcase.astro';
-import { navItems, site } from '../data/site';
+import { site } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -17,24 +13,16 @@ import Layout from '../layouts/Layout.astro';
   <main id="main">
     <Hero />
     <ValueSection />
-    <WorkShowcase />
-    <PrinciplesSection />
-    <SkillsSection />
     <ExperienceSection />
-    <ImpactSection />
     <ContactSection />
   </main>
-
-  <nav class="mobile-dock" aria-label="Mobile quick navigation">
-    {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
-  </nav>
 
   <footer class="footer">
     <p>{site.name} - {site.location}</p>
   </footer>
 
   <script>
-    const revealTargets = document.querySelectorAll('.reveal, [data-system-board]');
+    const revealTargets = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting));

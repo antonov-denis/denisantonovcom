@@ -2,35 +2,30 @@
 import { site } from '../data/site';
 ---
 
-<section class="section about-contact" id="contact" aria-labelledby="contact-title">
-  <article class="about-panel reveal">
-    <p class="eyebrow">The human layer</p>
-    <h2>I like software that gives teams room to move.</h2>
+<section class="section contact-section" id="contact" aria-labelledby="contact-title">
+  <div class="contact-copy reveal">
+    <p class="eyebrow">Contact</p>
+    <h2 id="contact-title">Send the problem, not a perfect brief.</h2>
     <p>
-      I am a software engineer based in Sofia, Bulgaria. My work sits between product engineering
-      and platform thinking: understanding where systems slow people down, then designing cleaner
-      paths through that complexity.
+      A role, a product idea, a system that needs untangling, or a team looking for another
+      engineer. A few honest sentences are enough to start.
     </p>
-    <p>
-      I am especially drawn to projects where architecture, communication, rollout, documentation,
-      and adoption all matter.
-    </p>
-    <p>
-      Before software engineering, I worked in client-facing financial operations. That experience
-      still shapes how I communicate technical trade-offs today.
-    </p>
-  </article>
-  <aside class="contact-panel reveal">
-    <p class="eyebrow">Build the next system</p>
-    <h2 id="contact-title">Looking for someone who can bring structure to complex systems?</h2>
-    <p class="lead">
-      Good conversations usually start with a messy system, an ambitious product goal, or a feature
-      that deserves to become a platform.
-    </p>
-    <div class="cta-row">
-      <a class="button primary" href={`mailto:${site.email}`}>Email me</a>
-      <a class="button" href="https://www.linkedin.com/" rel="noreferrer">LinkedIn</a>
-      <a class="button" href="/resume.pdf">Resume</a>
+  </div>
+
+  <div class="contact-board reveal">
+    <a class="contact-primary" href={`mailto:${site.email}?subject=Hello%20Denis`}>
+      <span>Email me</span>
+      <strong>{site.email}</strong>
+    </a>
+    <div class="contact-secondary" aria-label="Additional links">
+      <a href={site.linkedin} target="_blank" rel="noreferrer">
+        <span>LinkedIn</span>
+        <strong>Profile</strong>
+      </a>
+      <a href="/resume.pdf" target="_blank">
+        <span>Resume</span>
+        <strong>PDF</strong>
+      </a>
     </div>
-  </aside>
+  </div>
 </section>

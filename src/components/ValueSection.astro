@@ -1,34 +1,39 @@
 ---
-import { valueCards } from '../data/site';
+import { aboutCards } from '../data/site';
 ---
 
-<section class="section" aria-labelledby="value-title">
-  <div class="section-head reveal">
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="section-head about-head reveal">
     <div>
-      <p class="eyebrow">What changes after the work</p>
-      <h2 id="value-title">Cleaner systems are a product feature.</h2>
+      <p class="eyebrow">About</p>
+      <h2 id="about-title">From unclear brief to maintainable system.</h2>
     </div>
     <p>
-      The through-line is simple: teams should spend more time delivering value and less time
-      negotiating brittle implementation details.
+      I usually do my best work when the problem needs a bit of untangling first: what the workflow
+      is, where the state lives, and what future changes should not have to rediscover.
     </p>
   </div>
-  <div class="grid-3">
-    {
-      valueCards.map((card) => (
-        <article class="card reveal">
-          <div>
-            <h3>{card.title}</h3>
-            <p>{card.body}</p>
-          </div>
-          <p class="proof">{card.proof}</p>
-          <div class="before-after" aria-label={`Before ${card.before}. After ${card.after}.`}>
-            <span><strong>Before</strong>{card.before}</span>
-            <b class="arrow" aria-hidden="true">to</b>
-            <span><em>After</em>{card.after}</span>
-          </div>
-        </article>
-      ))
-    }
+
+  <div class="work-map reveal">
+    <div class="work-map-spine" aria-hidden="true"></div>
+    <div class="work-map-center">
+      <span>Workflow</span>
+      <strong>Code</strong>
+      <span>Handover</span>
+    </div>
+    <div class="about-lanes">
+      {
+        aboutCards.map((card, index) => (
+          <article class="card reveal">
+            <span class="card-index">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </div>
+            <p class="proof">{card.proof}</p>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>

@@ -24,7 +24,18 @@ import { navItems, site } from "../data/site";
         aria-label="Toggle color theme"
         data-theme-toggle
       >
-        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-icons" aria-hidden="true">
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+              d="M12 2v2.5M12 19.5V22M4.93 4.93 6.7 6.7M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07 6.7 17.3M17.3 6.7l1.77-1.77"
+            ></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24">
+            <path d="M20.2 14.8A8.2 8.2 0 0 1 9.2 3.8 8.7 8.7 0 1 0 20.2 14.8Z"
+            ></path>
+          </svg>
+        </span>
       </button>
       <button
         class="menu-button"
@@ -35,16 +46,24 @@ import { navItems, site } from "../data/site";
         data-menu-toggle></button>
     </div>
   </nav>
-  <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
-    {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
-  </div>
 </header>
+
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+  {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+</div>
 
 <script>
   const root = document.documentElement;
+  const body = document.body;
   const themeButton = document.querySelector("[data-theme-toggle]");
   const menuButton = document.querySelector("[data-menu-toggle]");
   const mobileMenu = document.querySelector("[data-mobile-menu]");
+
+  const closeDrawer = () => {
+    menuButton?.setAttribute("aria-expanded", "false");
+    mobileMenu?.classList.remove("is-open");
+    body.classList.remove("drawer-open");
+  };
 
   themeButton?.addEventListener("click", () => {
     const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
@@ -56,13 +75,40 @@ import { navItems, site } from "../data/site";
     const isOpen = menuButton.getAttribute("aria-expanded") === "true";
     menuButton.setAttribute("aria-expanded", String(!isOpen));
     mobileMenu?.classList.toggle("is-open", !isOpen);
+    body.classList.toggle("drawer-open", !isOpen);
   });
 
-  mobileMenu?.addEventListener("click", (event) => {
+  document.addEventListener("click", (event) => {
     const target = event.target;
-    if (target instanceof HTMLAnchorElement) {
-      menuButton?.setAttribute("aria-expanded", "false");
-      mobileMenu.classList.remove("is-open");
+    if (!(target instanceof Element)) return;
+
+    const link = target.closest('a[href^="#"]');
+    if (!(link instanceof HTMLAnchorElement)) return;
+
+    const id = link.hash.slice(1);
+    const destination = id ? document.getElementById(id) : null;
+    if (!destination) return;
+
+    event.preventDefault();
+    closeDrawer();
+    destination.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && mobileMenu?.classList.contains("is-open")) {
+      closeDrawer();
     }
   });
+
+  if (window.location.hash) {
+    const id = window.location.hash.slice(1);
+    const destination = document.getElementById(id);
+    if (destination) {
+      window.requestAnimationFrame(() => {
+        destination.scrollIntoView({ block: "start" });
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      });
+    }
+  }
 </script>

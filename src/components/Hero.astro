@@ -3,37 +3,37 @@ import { site } from '../data/site';
 ---
 
 <section class="section hero" id="top" aria-labelledby="hero-title">
-  <div class="reveal">
-    <p class="eyebrow">Software engineer - platform-minded product work</p>
-    <h1 id="hero-title">From friction to flow.</h1>
-    <p class="lead">
-      I build reusable product systems for teams dealing with legacy interfaces, duplicated logic,
-      asynchronous workflows, and the quiet cost of hard-to-change software.
-    </p>
-    <div class="cta-row" aria-label="Primary actions">
-      <a class="button primary" href="#work">View selected work</a>
-      <a class="button" href={`mailto:${site.email}`}>Start a conversation</a>
-    </div>
-    <div class="metadata" aria-label="Profile metadata">
-      <span>{site.location}</span>
-      <span>{site.availability}</span>
-      <span>Frontend, platform, architecture</span>
-    </div>
-  </div>
+  <figure class="hero-portrait reveal">
+    <img src="/profile.jpg" alt="Portrait of Denis Antonov" width="640" height="800" loading="eager" />
+  </figure>
 
-  <div class="system-board reveal" aria-label="System transformation diagram" data-system-board>
-    <div class="system-board-inner">
-      <div class="board-row">
-        <div class="node">Legacy UI<small>Drift, duplication, fragile changes</small></div>
-        <div class="node">Event workflow<small>State, validation, readiness</small></div>
-        <div class="node">Domain config<small>Shared model, fewer edits</small></div>
-      </div>
-      <div class="flow-line" aria-hidden="true"></div>
-      <div class="board-row">
-        <div class="node">Reusable modules<small>Clear ownership and adoption</small></div>
-        <div class="node">Platform capability<small>One system, many products</small></div>
-        <div class="node">Documented rollout<small>Teams can move faster</small></div>
-      </div>
-    </div>
+  <p class="eyebrow reveal">Software Engineer</p>
+  <h1 id="hero-title" class="reveal">{site.name}</h1>
+  <p class="hero-role reveal">{site.role}</p>
+  <p class="lead reveal">
+    I build maintainable product systems across services, APIs, web applications, and documentation.
+    Currently working at Financial Times in Sofia.
+  </p>
+  <div class="hero-actions reveal" aria-label="Primary actions">
+    <a class="icon-link primary" href={`mailto:${site.email}`} aria-label="Email Denis">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3.5" y="5.5" width="17" height="13" rx="2.25"></rect>
+        <path d="m5 7 7 5.25L19 7"></path>
+      </svg>
+    </a>
+    <a class="icon-link" href={site.linkedin} target="_blank" rel="noreferrer" aria-label="Open LinkedIn profile">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="brand-icon">
+        <path d="M6.94 8.94H3.75v10.31h3.19V8.94Z"></path>
+        <path d="M5.35 4.75a1.85 1.85 0 1 0 0 3.7 1.85 1.85 0 0 0 0-3.7Z"></path>
+        <path d="M10.05 19.25h3.18v-5.6c0-1.48.68-2.34 1.88-2.34 1.1 0 1.63.78 1.63 2.34v5.6h3.19v-6.35c0-3.02-1.62-4.42-3.78-4.42-1.74 0-2.52.95-2.95 1.62h.03V8.94h-3.18c.04.96 0 10.31 0 10.31Z"></path>
+      </svg>
+    </a>
+    <a class="icon-link" href="/resume.pdf" target="_blank" aria-label="Open resume">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 3.75h7.2L18.5 8v12.25H7V3.75Z"></path>
+        <path d="M14 4v4.25h4.25"></path>
+        <path d="M9.75 12.25h5.5M9.75 15.25h5.5M9.75 18.25h3.25"></path>
+      </svg>
+    </a>
   </div>
 </section>
