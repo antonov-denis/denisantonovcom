@@ -1,0 +1,14 @@
+.astro/
+.git/
+.pnpm-store/
+.vscode/
+dist/
+node_modules/
+
+.astro-dev*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+.env
+.env.*

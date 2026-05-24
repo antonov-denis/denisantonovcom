@@ -1,0 +1,19 @@
+services:
+  site:
+    build:
+      context: .
+    container_name: denisantonov-site
+    restart: unless-stopped
+    environment:
+      ACME_EMAIL: antonov.denis.srs@gmail.com
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

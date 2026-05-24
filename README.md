@@ -24,3 +24,18 @@ src/
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 
 Update contact links, resume, and project copy in `src/data/site.ts` and `src/components/ContactSection.astro`.
+
+## Production Docker
+
+The production image builds the Astro site and serves the static output with Caddy.
+
+```sh
+docker compose up -d --build
+```
+
+DNS should point both records at the server running the container:
+
+- `A` / `AAAA` for `denisantonov.com`
+- `CNAME` or `A` / `AAAA` for `www.denisantonov.com`
+
+Caddy automatically provisions HTTPS certificates. `www.denisantonov.com` redirects to the apex domain.
