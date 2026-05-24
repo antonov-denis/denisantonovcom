@@ -1,0 +1,68 @@
+---
+import { navItems, site } from "../data/site";
+---
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="#top" aria-label={`${site.name} home`}>
+      <span>{site.name}</span>
+    </a>
+    <div class="nav-links">
+      {
+        navItems.map((item) => (
+          <a class="nav-link" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="nav-actions">
+      <button
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle color theme"
+        data-theme-toggle
+      >
+        <span class="theme-icon" aria-hidden="true"></span>
+      </button>
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+    {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const themeButton = document.querySelector("[data-theme-toggle]");
+  const menuButton = document.querySelector("[data-menu-toggle]");
+  const mobileMenu = document.querySelector("[data-mobile-menu]");
+
+  themeButton?.addEventListener("click", () => {
+    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = nextTheme;
+    localStorage.setItem("denis-theme", nextTheme);
+  });
+
+  menuButton?.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+    menuButton.setAttribute("aria-expanded", String(!isOpen));
+    mobileMenu?.classList.toggle("is-open", !isOpen);
+  });
+
+  mobileMenu?.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target instanceof HTMLAnchorElement) {
+      menuButton?.setAttribute("aria-expanded", "false");
+      mobileMenu.classList.remove("is-open");
+    }
+  });
+</script>

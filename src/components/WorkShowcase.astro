@@ -1,0 +1,77 @@
+---
+import { projects } from '../data/site';
+
+const initialProject = projects[0];
+---
+
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="section-head reveal">
+    <div>
+      <p class="eyebrow">Selected transformations</p>
+      <h2 id="work-title">The best engineering work changes the shape of the next feature.</h2>
+    </div>
+    <p>Three systems, three transformations: migration, reusable capability, and configuration architecture.</p>
+  </div>
+
+  <div class="project-grid">
+    <div class="project-list reveal" role="tablist" aria-label="Featured work">
+      {
+        projects.map((project, index) => (
+          <button
+            class="project-button"
+            type="button"
+            role="tab"
+            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-controls="project-panel"
+            data-project={project.id}
+          >
+            <h3>{project.title}</h3>
+            <p>{project.label}</p>
+          </button>
+        ))
+      }
+    </div>
+
+    <article class="project-panel reveal" id="project-panel" role="tabpanel" aria-live="polite">
+      <p class="eyebrow" data-project-label>{initialProject.label}</p>
+      <h3 data-project-title>{initialProject.title}</h3>
+      <p class="lead" data-project-summary>{initialProject.summary}</p>
+      <ol class="stage-list" data-project-stages>
+        {initialProject.stages.map((stage) => <li>{stage}</li>)}
+      </ol>
+      <p class="outcome" data-project-outcome>{initialProject.outcome}</p>
+    </article>
+  </div>
+</section>
+
+<script define:vars={{ projects }}>
+  const projectButtons = document.querySelectorAll('[data-project]');
+  const label = document.querySelector('[data-project-label]');
+  const title = document.querySelector('[data-project-title]');
+  const summary = document.querySelector('[data-project-summary]');
+  const stages = document.querySelector('[data-project-stages]');
+  const outcome = document.querySelector('[data-project-outcome]');
+
+  const renderProject = (id) => {
+    const project = projects.find((item) => item.id === id);
+    if (!project || !label || !title || !summary || !stages || !outcome) return;
+
+    label.textContent = project.label;
+    title.textContent = project.title;
+    summary.textContent = project.summary;
+    outcome.textContent = project.outcome;
+    stages.replaceChildren(...project.stages.map((stage) => {
+      const item = document.createElement('li');
+      item.textContent = stage;
+      return item;
+    }));
+
+    projectButtons.forEach((button) => {
+      button.setAttribute('aria-selected', String(button.dataset.project === id));
+    });
+  };
+
+  projectButtons.forEach((button) => {
+    button.addEventListener('click', () => renderProject(button.dataset.project));
+  });
+</script>

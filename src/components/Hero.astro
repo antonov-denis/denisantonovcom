@@ -1,0 +1,39 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="section hero" id="top" aria-labelledby="hero-title">
+  <div class="reveal">
+    <p class="eyebrow">Software engineer - platform-minded product work</p>
+    <h1 id="hero-title">From friction to flow.</h1>
+    <p class="lead">
+      I build reusable product systems for teams dealing with legacy interfaces, duplicated logic,
+      asynchronous workflows, and the quiet cost of hard-to-change software.
+    </p>
+    <div class="cta-row" aria-label="Primary actions">
+      <a class="button primary" href="#work">View selected work</a>
+      <a class="button" href={`mailto:${site.email}`}>Start a conversation</a>
+    </div>
+    <div class="metadata" aria-label="Profile metadata">
+      <span>{site.location}</span>
+      <span>{site.availability}</span>
+      <span>Frontend, platform, architecture</span>
+    </div>
+  </div>
+
+  <div class="system-board reveal" aria-label="System transformation diagram" data-system-board>
+    <div class="system-board-inner">
+      <div class="board-row">
+        <div class="node">Legacy UI<small>Drift, duplication, fragile changes</small></div>
+        <div class="node">Event workflow<small>State, validation, readiness</small></div>
+        <div class="node">Domain config<small>Shared model, fewer edits</small></div>
+      </div>
+      <div class="flow-line" aria-hidden="true"></div>
+      <div class="board-row">
+        <div class="node">Reusable modules<small>Clear ownership and adoption</small></div>
+        <div class="node">Platform capability<small>One system, many products</small></div>
+        <div class="node">Documented rollout<small>Teams can move faster</small></div>
+      </div>
+    </div>
+  </div>
+</section>

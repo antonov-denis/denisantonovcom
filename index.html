@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Denis Antonov — From Friction to Flow</title>
+  <meta name="description" content="A portfolio concept for Denis Antonov, a software engineer turning fragmented product systems into scalable, reusable platforms." />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: oklch(98% 0.014 308);
+      --surface: oklch(100% 0.004 92);
+      --surface-2: oklch(95% 0.018 305);
+      --fg: oklch(20% 0.025 286);
+      --muted: oklch(47% 0.025 286);
+      --border: oklch(86% 0.018 302);
+      --accent: oklch(72% 0.105 304);
+      --accent-strong: oklch(58% 0.145 304);
+      --sage: oklch(76% 0.07 155);
+      --sky: oklch(77% 0.075 230);
+      --blush: oklch(82% 0.065 20);
+      --warn: oklch(74% 0.13 72);
+      --success: oklch(68% 0.13 150);
+      --shadow: 0 24px 70px color-mix(in oklch, var(--accent) 18%, transparent);
+      --font-display: "Iowan Old Style", "Fraunces", "Playfair Display", Georgia, serif;
+      --font-body: "IBM Plex Sans", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", "JetBrains Mono", ui-monospace, Menlo, monospace;
+      --max: 1180px;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: oklch(18% 0.03 300);
+      --surface: oklch(23% 0.026 294);
+      --surface-2: oklch(27% 0.032 292);
+      --fg: oklch(94% 0.012 306);
+      --muted: oklch(72% 0.022 300);
+      --border: oklch(37% 0.034 294);
+      --accent: oklch(78% 0.11 306);
+      --accent-strong: oklch(84% 0.12 306);
+      --sage: oklch(72% 0.08 155);
+      --sky: oklch(74% 0.09 230);
+      --blush: oklch(74% 0.075 18);
+      --warn: oklch(78% 0.12 76);
+      --success: oklch(72% 0.12 150);
+      --shadow: 0 28px 80px color-mix(in oklch, var(--accent) 12%, transparent);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% -4%, color-mix(in oklch, var(--accent) 18%, transparent), transparent 32rem),
+        linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--bg) 84%, var(--surface-2)));
+      color: var(--fg);
+      font: 17px/1.65 var(--font-body);
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid color-mix(in oklch, var(--accent) 62%, transparent); outline-offset: 4px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: color-mix(in oklch, var(--bg) 82%, transparent);
+      border-bottom: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 24px;
+      padding: 0 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 720;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--surface), color-mix(in oklch, var(--accent) 20%, var(--surface)));
+      box-shadow: 0 10px 30px color-mix(in oklch, var(--accent) 15%, transparent);
+      font-family: var(--font-display);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a, .theme-toggle, .chip-button {
+      min-height: 40px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 8px 13px;
+      color: var(--muted);
+      background: transparent;
+      transition: border-color .18s ease, background .18s ease, color .18s ease, transform .18s ease;
+    }
+
+    .nav-links a:hover, .theme-toggle:hover, .chip-button:hover {
+      color: var(--fg);
+      border-color: var(--border);
+      background: color-mix(in oklch, var(--surface) 80%, transparent);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--fg);
+    }
+
+    main { overflow: clip; }
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 104px 24px;
+    }
+
+    .hero {
+      max-width: 1360px;
+      min-height: calc(100svh - 72px);
+      padding: 64px 24px 72px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, 560px);
+      align-items: center;
+      gap: 58px;
+      position: relative;
+    }
+
+    .eyebrow {
+      font: 700 12px/1.2 var(--font-mono);
+      color: var(--accent-strong);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+
+    h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 560; text-wrap: pretty; }
+    h1 {
+      max-width: 850px;
+      font-size: clamp(54px, 8vw, 112px);
+      line-height: .93;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(19px, 2.2vw, 25px);
+      line-height: 1.48;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 12px 18px;
+      background: var(--surface);
+      color: var(--fg);
+      font-weight: 700;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--sky) 55%, var(--accent)));
+      border-color: color-mix(in oklch, var(--accent) 64%, var(--border));
+      color: oklch(18% 0.03 295);
+    }
+
+    .metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 34px;
+      color: var(--muted);
+      font: 13px/1.3 var(--font-mono);
+    }
+
+    .metadata span {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: color-mix(in oklch, var(--surface) 78%, transparent);
+    }
+
+    .system-canvas {
+      min-height: 620px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--border) 32%, transparent) 1px, transparent 1px),
+        linear-gradient(180deg, color-mix(in oklch, var(--border) 32%, transparent) 1px, transparent 1px),
+        color-mix(in oklch, var(--surface) 84%, transparent);
+      background-size: 52px 52px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .system-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: 999px;
+      background: radial-gradient(circle, color-mix(in oklch, var(--accent) 20%, transparent), transparent 64%);
+      filter: blur(16px);
+    }
+
+    .diagram-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .diagram-line {
+      stroke: color-mix(in oklch, var(--accent) 58%, transparent);
+      stroke-width: 1.6;
+      stroke-dasharray: 8 10;
+      opacity: .7;
+    }
+
+    .fragment {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid color-mix(in oklch, var(--border) 78%, var(--accent));
+      border-radius: 12px;
+      padding: 9px 11px;
+      background: color-mix(in oklch, var(--surface) 86%, transparent);
+      color: var(--fg);
+      font: 12px/1.2 var(--font-mono);
+      box-shadow: 0 14px 40px color-mix(in oklch, var(--fg) 7%, transparent);
+      transform: translate(var(--mess-x), var(--mess-y)) rotate(var(--rot));
+      transition: transform .5s cubic-bezier(.2,.8,.2,1), border-color .18s ease, background .18s ease;
+    }
+
+    .system-canvas:hover .fragment,
+    .system-canvas.is-aligned .fragment {
+      transform: translate(0, 0) rotate(0deg);
+      border-color: color-mix(in oklch, var(--accent) 70%, var(--border));
+    }
+
+    .fragment::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent);
+    }
+
+    .f1 { left: 8%; top: 12%; --mess-x: 18px; --mess-y: 20px; --rot: -8deg; }
+    .f2 { left: 48%; top: 9%; --mess-x: -28px; --mess-y: 16px; --rot: 5deg; }
+    .f3 { left: 18%; top: 31%; --mess-x: 36px; --mess-y: -18px; --rot: 10deg; }
+    .f4 { left: 58%; top: 34%; --mess-x: -36px; --mess-y: 24px; --rot: -7deg; }
+    .f5 { left: 10%; top: 56%; --mess-x: 44px; --mess-y: 12px; --rot: 7deg; }
+    .f6 { left: 54%; top: 62%; --mess-x: -22px; --mess-y: -24px; --rot: -5deg; }
+    .f7 { left: 30%; top: 78%; --mess-x: 24px; --mess-y: -16px; --rot: 4deg; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .86fr) minmax(260px, .44fr);
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section h2 {
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: 1;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .value-card, .project-card, .principle, .timeline-item, .contact-panel {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: color-mix(in oklch, var(--surface) 88%, transparent);
+      box-shadow: 0 16px 42px color-mix(in oklch, var(--fg) 5%, transparent);
+    }
+
+    .value-card {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      min-height: 350px;
+    }
+
+    .value-card h3, .project-card h3, .principle h3 {
+      font-size: 30px;
+      line-height: 1.05;
+    }
+
+    .value-card p, .project-card p, .principle p, .timeline-item p {
+      color: var(--muted);
+      margin: 14px 0 0;
+    }
+
+    .proof {
+      margin-top: 18px;
+      color: var(--accent-strong);
+      font: 700 12px/1.35 var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .before-after {
+      margin-top: auto;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: color-mix(in oklch, var(--surface-2) 64%, transparent);
+    }
+
+    .ba-toggle {
+      width: 100%;
+      border: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      background: transparent;
+      color: var(--fg);
+      text-align: left;
+    }
+
+    .ba-state {
+      font: 700 11px/1 var(--font-mono);
+      letter-spacing: .12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .ba-copy { font-weight: 740; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .project-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .project-card {
+      padding: 20px;
+      text-align: left;
+      color: var(--fg);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .project-card[aria-selected="true"] {
+      border-color: color-mix(in oklch, var(--accent) 72%, var(--border));
+      background: color-mix(in oklch, var(--accent) 12%, var(--surface));
+      transform: translateX(6px);
+    }
+
+    .architecture {
+      min-height: 620px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 28px;
+      background:
+        radial-gradient(circle at 70% 15%, color-mix(in oklch, var(--sky) 18%, transparent), transparent 26rem),
+        color-mix(in oklch, var(--surface) 88%, transparent);
+      position: sticky;
+      top: 96px;
+      overflow: hidden;
+    }
+
+    .architecture h3 {
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1;
+    }
+
+    .stage-line {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 34px;
+      position: relative;
+    }
+
+    .stage-node {
+      min-height: 104px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 13px;
+      background: var(--surface);
+      position: relative;
+    }
+
+    .stage-node strong {
+      display: block;
+      font: 700 12px/1.25 var(--font-mono);
+      color: var(--accent-strong);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .note-panel {
+      margin-top: 24px;
+      border-left: 3px solid var(--accent);
+      padding-left: 18px;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .principle {
+      padding: 20px;
+      min-height: 292px;
+    }
+
+    .principle details {
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    summary {
+      color: var(--accent-strong);
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .skills-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .75fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .constellation {
+      min-height: 540px;
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 45% 45%, color-mix(in oklch, var(--accent) 16%, transparent), transparent 18rem),
+        linear-gradient(90deg, color-mix(in oklch, var(--border) 26%, transparent) 1px, transparent 1px),
+        linear-gradient(180deg, color-mix(in oklch, var(--border) 26%, transparent) 1px, transparent 1px),
+        color-mix(in oklch, var(--surface) 88%, transparent);
+      background-size: auto, 54px 54px, 54px 54px, auto;
+      overflow: hidden;
+    }
+
+    .skill-node {
+      position: absolute;
+      min-width: 108px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 13px;
+      background: var(--surface);
+      color: var(--fg);
+      font: 700 13px/1 var(--font-mono);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .skill-node:hover, .skill-node.is-active {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      background: color-mix(in oklch, var(--accent) 14%, var(--surface));
+    }
+
+    .skill-detail {
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      background: var(--surface);
+    }
+
+    .skill-detail h3 { font-size: 34px; }
+    .related-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .related-list li {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 12px;
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+      position: relative;
+    }
+
+    .timeline-item {
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .timeline-meta {
+      font: 700 12px/1.35 var(--font-mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: var(--muted);
+      background: color-mix(in oklch, var(--surface-2) 52%, transparent);
+      font: 12px/1.2 var(--font-mono);
+    }
+
+    .impact-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .impact-item {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      background: var(--surface);
+      min-height: 224px;
+      display: grid;
+      align-content: space-between;
+      overflow: hidden;
+    }
+
+    .messy {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .messy span {
+      width: 44px;
+      height: 17px;
+      border: 1px solid color-mix(in oklch, var(--warn) 45%, var(--border));
+      border-radius: 5px;
+      opacity: .7;
+      transform: rotate(var(--r));
+    }
+
+    .clear {
+      border: 1px solid color-mix(in oklch, var(--success) 50%, var(--border));
+      border-radius: 14px;
+      padding: 13px;
+      background: color-mix(in oklch, var(--success) 10%, var(--surface));
+      font-weight: 750;
+    }
+
+    .about-contact {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(340px, .68fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .about-copy {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 34px;
+      background: color-mix(in oklch, var(--surface) 88%, transparent);
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 19px;
+      margin: 16px 0 0;
+    }
+
+    .contact-panel {
+      padding: 28px;
+      background:
+        radial-gradient(circle at 75% 20%, color-mix(in oklch, var(--accent) 24%, transparent), transparent 18rem),
+        var(--surface);
+    }
+
+    .contact-panel h2 { font-size: clamp(34px, 4vw, 54px); }
+
+    .mobile-dock {
+      display: none;
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 40;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: color-mix(in oklch, var(--surface) 88%, transparent);
+      backdrop-filter: blur(18px);
+      padding: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-dock a {
+      flex: 1;
+      text-align: center;
+      min-height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 750;
+      font-size: 13px;
+    }
+
+    .mobile-dock a:hover { background: color-mix(in oklch, var(--accent) 14%, transparent); color: var(--fg); }
+
+    @media (max-width: 980px) {
+      .nav { grid-template-columns: 1fr auto; }
+      .nav-links { display: none; }
+      .hero, .section-head, .project-grid, .skills-wrap, .about-contact {
+        grid-template-columns: 1fr;
+      }
+      .hero { min-height: auto; padding-top: 48px; }
+      .system-canvas { min-height: 480px; }
+      .cards-3, .principles-grid, .impact-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .architecture { position: relative; top: auto; min-height: auto; }
+      .stage-line { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      body { font-size: 16px; padding-bottom: 72px; }
+      .nav { min-height: 64px; padding: 0 16px; }
+      .section { padding: 72px 16px; }
+      .hero { padding: 40px 16px 60px; }
+      .cards-3, .principles-grid, .impact-strip { grid-template-columns: 1fr; }
+      .metadata, .cta-row { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+      .system-canvas { min-height: 420px; border-radius: 20px; }
+      .fragment { font-size: 10px; padding: 8px; }
+      .f4, .f6 { left: 42%; }
+      .constellation { min-height: 620px; }
+      .skill-node { min-width: 96px; font-size: 12px; }
+      .mobile-dock { display: flex; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Denis Antonov home">
+        <span class="brand-mark">D</span>
+        <span>Denis Antonov</span>
+      </a>
+      <div class="nav-links" aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#systems">Systems</a>
+        <a href="#principles">Principles</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle theme">
+        <span aria-hidden="true">◐</span><span id="themeLabel">Dark</span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">Software Engineer · Platform Thinking · Product Systems</p>
+        <h1 id="hero-title">I turn fragmented software into systems teams can build on.</h1>
+        <p class="lead">I’m Denis Antonov, a software engineer working across frontend, backend, and platform capabilities. I modernise legacy services, design reusable architectures, and build product systems that scale across teams, titles, and users.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#work">Explore the systems I’ve rebuilt</a>
+          <a class="btn" href="#contact">View resume</a>
+        </div>
+        <div class="metadata" aria-label="Profile metadata">
+          <span>Sofia, Bulgaria</span>
+          <span>TypeScript · Node.js · React · AWS</span>
+          <span>Open to product-minded engineering teams</span>
+        </div>
+      </div>
+
+      <div class="system-canvas" id="systemCanvas" aria-label="Animated system diagram from fragmented work to shared platform">
+        <svg class="diagram-svg" viewBox="0 0 560 620" aria-hidden="true">
+          <path class="diagram-line" d="M92 96 C205 120, 252 208, 342 86" />
+          <path class="diagram-line" d="M124 246 C250 275, 320 278, 424 232" />
+          <path class="diagram-line" d="M108 420 C242 366, 320 420, 438 382" />
+          <path class="diagram-line" d="M230 520 C274 418, 372 342, 432 232" />
+        </svg>
+        <span class="fragment f1">legacy frontend</span>
+        <span class="fragment f2">event pipeline</span>
+        <span class="fragment f3">duplicated logic</span>
+        <span class="fragment f4">shared platform</span>
+        <span class="fragment f5">editorial workflow</span>
+        <span class="fragment f6">reusable modules</span>
+        <span class="fragment f7">system ownership</span>
+      </div>
+    </section>
+
+    <section class="section" id="systems" aria-labelledby="value-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">What I actually do</p>
+          <h2 id="value-title">I work at the point where code quality becomes product velocity.</h2>
+        </div>
+        <p>Each pattern starts with friction: slow changes, unclear ownership, repeated logic, or a capability trapped in one product.</p>
+      </div>
+      <div class="cards-3">
+        <article class="value-card">
+          <h3>Modernise legacy interfaces</h3>
+          <p>I replace fragile, inconsistent frontend systems with shared architecture, reusable modules, and clear engineering standards.</p>
+          <p class="proof">Frontend rewrite · Shared component ecosystem · Reduced technical debt</p>
+          <div class="before-after">
+            <button class="ba-toggle" type="button" data-before="Fragmented frontend implementation" data-after="Shared architecture and reusable modules">
+              <span><span class="ba-state">Before</span><br><span class="ba-copy">Fragmented frontend implementation</span></span>
+              <span aria-hidden="true">↔</span>
+            </button>
+          </div>
+        </article>
+        <article class="value-card">
+          <h3>Systemise repeated work</h3>
+          <p>I identify patterns hiding inside duplicated code and turn them into centralised models that are easier to reason about, extend, and maintain.</p>
+          <p class="proof">Configuration architecture · Deep modules / thin interfaces · Up to 70% code reduction</p>
+          <div class="before-after">
+            <button class="ba-toggle" type="button" data-before="12 files touched for one page update" data-after="Centralised page/domain configuration">
+              <span><span class="ba-state">Before</span><br><span class="ba-copy">12 files touched for one page update</span></span>
+              <span aria-hidden="true">↔</span>
+            </button>
+          </div>
+        </article>
+        <article class="value-card">
+          <h3>Productise technical capability</h3>
+          <p>I build internal capabilities that are not just technically complete, but documented, reusable, and ready for adoption across products.</p>
+          <p class="proof">Event-driven architecture · Six-product adoption · Rollout documentation</p>
+          <div class="before-after">
+            <button class="ba-toggle" type="button" data-before="One product needing audio" data-after="Reusable audio capability across six products">
+              <span><span class="ba-state">Before</span><br><span class="ba-copy">One product needing audio</span></span>
+              <span aria-hidden="true">↔</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Selected transformations</p>
+          <h2 id="work-title">The best engineering work changes the shape of the next feature.</h2>
+        </div>
+        <p>Three systems, three transformations: migration, reusable capability, and configuration architecture.</p>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-list" role="tablist" aria-label="Featured work">
+          <button class="project-card" type="button" role="tab" aria-selected="true" data-project="frontend">
+            <h3>Rebuilding a legacy frontend without stopping the product</h3>
+            <p>fDi Intelligence Frontend Modernisation</p>
+          </button>
+          <button class="project-card" type="button" role="tab" aria-selected="false" data-project="audio">
+            <h3>Designing audio as a reusable product capability</h3>
+            <p>Read Aloud Platform Capability</p>
+          </button>
+          <button class="project-card" type="button" role="tab" aria-selected="false" data-project="config">
+            <h3>Turning duplicated page logic into configuration</h3>
+            <p>Shared Pages Configuration Refactor</p>
+          </button>
+        </div>
+
+        <article class="architecture" id="projectPanel" aria-live="polite">
+          <p class="eyebrow" id="projectKicker">Frontend modernisation</p>
+          <h3 id="projectTitle">Cleaner foundations without pausing the product.</h3>
+          <p class="note-panel" id="projectCopy">A fragmented frontend had drifted away from shared platform standards. The migration was planned as a sequence of manageable milestones, then rebuilt with shared patterns and deployed through AWS-aligned workflows.</p>
+          <div class="stage-line" id="stageLine"></div>
+          <p class="note-panel" id="projectOutcome">Outcome: a more maintainable frontend foundation delivered in roughly two months, with lower platform drag and better alignment across FT Specialist products.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="principles" aria-labelledby="principles-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">How I think</p>
+          <h2 id="principles-title">My engineering bias: make the next change easier.</h2>
+        </div>
+        <p>The systems I enjoy working on usually work, but slowly, inconsistently, or with too much hidden cost.</p>
+      </div>
+      <div class="principles-grid">
+        <article class="principle">
+          <h3>Start with the source of friction</h3>
+          <p>Before changing code, I look for where teams lose time: repeated edits, unclear ownership, brittle interfaces, or missing documentation.</p>
+          <details><summary>In practice</summary><p>Map the delay before proposing the abstraction.</p></details>
+        </article>
+        <article class="principle">
+          <h3>Prefer reusable capability</h3>
+          <p>A feature is more valuable when another team can adopt it without rediscovering the same operational problems.</p>
+          <details><summary>In practice</summary><p>Build documentation, validation, rollout paths, and ownership into the delivery.</p></details>
+        </article>
+        <article class="principle">
+          <h3>Design for operational reality</h3>
+          <p>Good architecture accounts for delay, failure, validation, observability, rollout, and future maintainers.</p>
+          <details><summary>In practice</summary><p>Async systems need state, retries, and user-facing readiness checks.</p></details>
+        </article>
+        <article class="principle">
+          <h3>Translate technical work into value</h3>
+          <p>Stakeholders need to understand risk, trade-offs, user value, and why a technical decision matters.</p>
+          <details><summary>In practice</summary><p>Explain what becomes faster, safer, clearer, or reusable.</p></details>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="skills-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Stack behind the story</p>
+          <h2 id="skills-title">Tools I use to make systems clearer.</h2>
+        </div>
+        <p>Grouped by engineering function, so the stack reads as capability rather than a keyword cloud.</p>
+      </div>
+      <div class="skills-wrap">
+        <div class="constellation" aria-label="Interactive skill constellation">
+          <button class="skill-node is-active" style="left:9%;top:12%" data-skill="TypeScript">TypeScript</button>
+          <button class="skill-node" style="left:42%;top:8%" data-skill="React">React</button>
+          <button class="skill-node" style="left:70%;top:21%" data-skill="Node.js">Node.js</button>
+          <button class="skill-node" style="left:22%;top:36%" data-skill="AWS">AWS</button>
+          <button class="skill-node" style="left:55%;top:42%" data-skill="EventBridge">EventBridge</button>
+          <button class="skill-node" style="left:12%;top:66%" data-skill="SQL">SQL</button>
+          <button class="skill-node" style="left:43%;top:72%" data-skill="Architecture">Architecture</button>
+          <button class="skill-node" style="left:68%;top:62%" data-skill="Documentation">Documentation</button>
+        </div>
+        <aside class="skill-detail">
+          <p class="eyebrow" id="skillKicker">Selected skill</p>
+          <h3 id="skillTitle">TypeScript</h3>
+          <ul class="related-list" id="skillList">
+            <li>Shared page configuration refactor</li>
+            <li>Frontend modernisation</li>
+            <li>Reusable product systems</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Experience</p>
+          <h2 id="experience-title">A career built around ownership, systems, and communication.</h2>
+        </div>
+        <p>The path is not presented as a CV. It is the route into product-aware platform engineering.</p>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-meta">Financial Times · Jul 2025 – Present</div>
+          <div>
+            <h3>Software Engineer · Sofia, Bulgaria</h3>
+            <p>Currently building platform capabilities and reusable architecture where frontend architecture, backend workflows, editorial needs, and business value intersect.</p>
+            <div class="chips"><span class="chip">frontend modernisation</span><span class="chip">event-driven architecture</span><span class="chip">six-product adoption</span><span class="chip">platform ownership</span></div>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-meta">Intermedia · Aug 2023 – Jun 2025</div>
+          <div>
+            <h3>Software Engineer</h3>
+            <p>Developed backend services, APIs, SQL-backed workflows, and responsive client-side applications across data-intensive platforms.</p>
+            <div class="chips"><span class="chip">backend services</span><span class="chip">APIs</span><span class="chip">SQL</span><span class="chip">maintainable delivery</span></div>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-meta">CluneTech · Apr 2022 – Jul 2023</div>
+          <div>
+            <h3>Business Representative</h3>
+            <p>Worked directly with clients, financial workflows, documentation, and operational problem-solving, shaping how technical trade-offs are communicated today.</p>
+            <div class="chips"><span class="chip">client communication</span><span class="chip">financial workflows</span><span class="chip">documentation</span></div>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-meta">Telerik Academy</div>
+          <div>
+            <h3>Mentor</h3>
+            <p>Helps students move from specifications to working applications, advising on architecture, technology choices, code quality, and practical engineering habits.</p>
+            <div class="chips"><span class="chip">mentorship</span><span class="chip">code reviews</span><span class="chip">system design guidance</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="impact-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Before / after</p>
+          <h2 id="impact-title">The pattern across my work.</h2>
+        </div>
+        <p>Fragmented, duplicated, hidden work becomes reusable, documented, and easier to change.</p>
+      </div>
+      <div class="impact-strip">
+        <article class="impact-item"><div class="messy"><span style="--r:-8deg"></span><span style="--r:5deg"></span><span style="--r:12deg"></span><span style="--r:-3deg"></span></div><p>fragmented frontend implementation</p><div class="clear">shared architecture and reusable modules</div></article>
+        <article class="impact-item"><div class="messy"><span style="--r:8deg"></span><span style="--r:-12deg"></span><span style="--r:4deg"></span></div><p>one product needing audio</p><div class="clear">reusable audio capability across six products</div></article>
+        <article class="impact-item"><div class="messy"><span style="--r:2deg"></span><span style="--r:-8deg"></span><span style="--r:10deg"></span><span style="--r:-14deg"></span></div><p>page updates spread across many files</p><div class="clear">centralised page/domain configuration</div></article>
+        <article class="impact-item"><div class="messy"><span style="--r:-5deg"></span><span style="--r:9deg"></span><span style="--r:-11deg"></span></div><p>technical work hidden in implementation detail</p><div class="clear">documented capability teams can adopt</div></article>
+      </div>
+    </section>
+
+    <section class="section about-contact" id="contact" aria-labelledby="contact-title">
+      <article class="about-copy">
+        <p class="eyebrow">The human layer</p>
+        <h2>I like software that gives teams room to move.</h2>
+        <p>I’m a software engineer based in Sofia, Bulgaria. My work sits between product engineering and platform thinking: I enjoy understanding where systems slow people down, then designing cleaner paths through that complexity.</p>
+        <p>I’m especially drawn to projects where the technical challenge is not isolated to one component, where architecture, communication, rollout, documentation, and adoption all matter.</p>
+        <p>Before becoming a software engineer, I worked in client-facing financial operations. That experience still shapes the way I communicate technical trade-offs today.</p>
+      </article>
+      <aside class="contact-panel">
+        <p class="eyebrow">Build the next system</p>
+        <h2 id="contact-title">Looking for someone who can bring structure to complex systems?</h2>
+        <p class="lead">Best conversations usually start with a messy system, an ambitious product goal, or a feature that deserves to become a platform.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="mailto:">Email me</a>
+          <a class="btn" href="#" aria-label="Connect on LinkedIn">LinkedIn</a>
+          <a class="btn" href="#" aria-label="Download resume">Resume</a>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <nav class="mobile-dock" aria-label="Mobile quick navigation">
+    <a href="#top">Story</a>
+    <a href="#work">Work</a>
+    <a href="#skills-title">Stack</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    const storedTheme = localStorage.getItem('denis-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function setTheme(theme) {
+      root.dataset.theme = theme;
+      themeLabel.textContent = theme === 'dark' ? 'Light' : 'Dark';
+      localStorage.setItem('denis-theme', theme);
+    }
+
+    setTheme(storedTheme || (prefersDark ? 'dark' : 'light'));
+    themeToggle.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    document.querySelectorAll('.ba-toggle').forEach((button) => {
+      let after = false;
+      button.addEventListener('click', () => {
+        after = !after;
+        button.querySelector('.ba-state').textContent = after ? 'After' : 'Before';
+        button.querySelector('.ba-copy').textContent = after ? button.dataset.after : button.dataset.before;
+      });
+    });
+
+    const projects = {
+      frontend: {
+        kicker: 'Frontend modernisation',
+        title: 'Cleaner foundations without pausing the product.',
+        copy: 'A fragmented frontend had drifted away from shared platform standards. The migration was planned as a sequence of manageable milestones, then rebuilt with shared patterns and deployed through AWS-aligned workflows.',
+        stages: ['Audit system', 'Identify drift', 'Plan milestones', 'Rebuild standards', 'Hand over'],
+        outcome: 'Outcome: a more maintainable frontend foundation delivered in roughly two months, with lower platform drag and better alignment across FT Specialist products.'
+      },
+      audio: {
+        kicker: 'Reusable product capability',
+        title: 'The Audio Journey: asynchronous work made adoptable.',
+        copy: 'Editorial content needed to become listenable across products. The system handles publish events, generation workers, readiness state, validation, controlled playback, analytics, and rollout guidance.',
+        stages: ['Article published', 'Audio requested', 'State stored', 'Playback validated', 'Reader listens'],
+        outcome: 'Outcome: a shared capability that enabled audio consumption across six products without six separate implementations.'
+      },
+      config: {
+        kicker: 'Configuration architecture',
+        title: 'One page change should not mean twelve file edits.',
+        copy: 'The title-based configuration model created duplication and high maintenance cost. A page/domain model moved decisions into one clearer central configuration.',
+        stages: ['Find duplication', 'Run spike', 'Model domains', 'Reduce coupling', 'Document rules'],
+        outcome: 'Outcome: significantly reduced related code, simpler future changes, and shared-page behaviour that is easier to understand and extend.'
+      }
+    };
+
+    const projectButtons = document.querySelectorAll('.project-card');
+    const stageLine = document.getElementById('stageLine');
+
+    function renderProject(key) {
+      const project = projects[key];
+      document.getElementById('projectKicker').textContent = project.kicker;
+      document.getElementById('projectTitle').textContent = project.title;
+      document.getElementById('projectCopy').textContent = project.copy;
+      document.getElementById('projectOutcome').textContent = project.outcome;
+      stageLine.innerHTML = project.stages.map((stage, index) => `<div class="stage-node"><strong>0${index + 1}</strong>${stage}</div>`).join('');
+      projectButtons.forEach((button) => button.setAttribute('aria-selected', String(button.dataset.project === key)));
+    }
+
+    projectButtons.forEach((button) => button.addEventListener('click', () => renderProject(button.dataset.project)));
+    renderProject('frontend');
+
+    const skillData = {
+      'TypeScript': ['Shared page configuration refactor', 'Frontend modernisation', 'Reusable product systems'],
+      'React': ['Multi-tenant frontend applications', 'Component architecture', 'Interactive editorial product surfaces'],
+      'Node.js': ['Backend workflows', 'API design', 'Service integration'],
+      'AWS': ['fDi frontend deployment', 'Read Aloud serverless architecture', 'Platform rollout work'],
+      'EventBridge': ['Publish-event workflows', 'Audio generation pipeline', 'Asynchronous product capability'],
+      'SQL': ['Data-intensive platform work', 'Backend services', 'Operational reporting flows'],
+      'Architecture': ['Deep modules / thin interfaces', 'Centralised domain logic', 'Reusable capability design'],
+      'Documentation': ['Rollout guidance', 'Team adoption paths', 'Stakeholder trade-off clarity']
+    };
+
+    const skillNodes = document.querySelectorAll('.skill-node');
+    skillNodes.forEach((node) => {
+      node.addEventListener('click', () => {
+        skillNodes.forEach((item) => item.classList.toggle('is-active', item === node));
+        document.getElementById('skillTitle').textContent = node.dataset.skill;
+        document.getElementById('skillList').innerHTML = skillData[node.dataset.skill].map((item) => `<li>${item}</li>`).join('');
+      });
+    });
+
+    const canvas = document.getElementById('systemCanvas');
+    const alignObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => canvas.classList.toggle('is-aligned', entry.isIntersecting && entry.intersectionRatio > .55));
+    }, { threshold: [.55] });
+    alignObserver.observe(canvas);
+  </script>
+</body>
+</html>

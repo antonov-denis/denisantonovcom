@@ -1,0 +1,28 @@
+---
+import { impacts } from '../data/site';
+---
+
+<section class="section" aria-labelledby="impact-title">
+  <div class="section-head reveal">
+    <div>
+      <p class="eyebrow">Before and after</p>
+      <h2 id="impact-title">The pattern across the work.</h2>
+    </div>
+    <p>Fragmented, duplicated, hidden work becomes reusable, documented, and easier to change.</p>
+  </div>
+  <div class="impact-grid">
+    {
+      impacts.map(([before, after]) => (
+        <article class="impact-item reveal">
+          <div class="impact-bars" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p>{before}</p>
+          <div class="impact-clear">{after}</div>
+        </article>
+      ))
+    }
+  </div>
+</section>

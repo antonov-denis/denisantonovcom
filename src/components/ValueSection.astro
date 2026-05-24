@@ -1,0 +1,34 @@
+---
+import { valueCards } from '../data/site';
+---
+
+<section class="section" aria-labelledby="value-title">
+  <div class="section-head reveal">
+    <div>
+      <p class="eyebrow">What changes after the work</p>
+      <h2 id="value-title">Cleaner systems are a product feature.</h2>
+    </div>
+    <p>
+      The through-line is simple: teams should spend more time delivering value and less time
+      negotiating brittle implementation details.
+    </p>
+  </div>
+  <div class="grid-3">
+    {
+      valueCards.map((card) => (
+        <article class="card reveal">
+          <div>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </div>
+          <p class="proof">{card.proof}</p>
+          <div class="before-after" aria-label={`Before ${card.before}. After ${card.after}.`}>
+            <span><strong>Before</strong>{card.before}</span>
+            <b class="arrow" aria-hidden="true">to</b>
+            <span><em>After</em>{card.after}</span>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
