@@ -5,7 +5,7 @@ import { navItems, site } from "../data/site";
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <nav class="nav" aria-label="Primary navigation">
-    <a class="brand" href="#top" aria-label={`${site.name} home`}>
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
       <span>{site.name}</span>
     </a>
     <div class="nav-links">
@@ -53,62 +53,54 @@ import { navItems, site } from "../data/site";
 </div>
 
 <script>
-  const root = document.documentElement;
-  const body = document.body;
-  const themeButton = document.querySelector("[data-theme-toggle]");
-  const menuButton = document.querySelector("[data-menu-toggle]");
-  const mobileMenu = document.querySelector("[data-mobile-menu]");
-
+  // Event delegation at module scope: this runs once and keeps working across
+  // View Transition navigations, where the header DOM is swapped for a fresh
+  // copy (so per-element listeners would go stale).
   const closeDrawer = () => {
-    menuButton?.setAttribute("aria-expanded", "false");
-    mobileMenu?.classList.remove("is-open");
-    body.classList.remove("drawer-open");
+    document
+      .querySelector("[data-menu-toggle]")
+      ?.setAttribute("aria-expanded", "false");
+    document.querySelector("[data-mobile-menu]")?.classList.remove("is-open");
+    document.body.classList.remove("drawer-open");
   };
-
-  themeButton?.addEventListener("click", () => {
-    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
-    root.dataset.theme = nextTheme;
-    localStorage.setItem("denis-theme", nextTheme);
-  });
-
-  menuButton?.addEventListener("click", () => {
-    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-    menuButton.setAttribute("aria-expanded", String(!isOpen));
-    mobileMenu?.classList.toggle("is-open", !isOpen);
-    body.classList.toggle("drawer-open", !isOpen);
-  });
 
   document.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
 
-    const link = target.closest('a[href^="#"]');
-    if (!(link instanceof HTMLAnchorElement)) return;
+    if (target.closest("[data-theme-toggle]")) {
+      const root = document.documentElement;
+      const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+      root.dataset.theme = nextTheme;
+      try {
+        localStorage.setItem("denis-theme", nextTheme);
+      } catch {}
+      return;
+    }
 
-    const id = link.hash.slice(1);
-    const destination = id ? document.getElementById(id) : null;
-    if (!destination) return;
+    const menuButton = target.closest("[data-menu-toggle]");
+    if (menuButton) {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+      document
+        .querySelector("[data-mobile-menu]")
+        ?.classList.toggle("is-open", !isOpen);
+      document.body.classList.toggle("drawer-open", !isOpen);
+      return;
+    }
 
-    event.preventDefault();
-    closeDrawer();
-    destination.scrollIntoView({ behavior: "smooth", block: "start" });
-    history.replaceState(null, "", window.location.pathname + window.location.search);
-  });
-
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && mobileMenu?.classList.contains("is-open")) {
+    // Close the drawer once a navigation link inside it is chosen.
+    if (target.closest("[data-mobile-menu] a")) {
       closeDrawer();
     }
   });
 
-  if (window.location.hash) {
-    const id = window.location.hash.slice(1);
-    const destination = document.getElementById(id);
-    if (destination) {
-      window.requestAnimationFrame(() => {
-        destination.scrollIntoView({ block: "start" });
-        history.replaceState(null, "", window.location.pathname + window.location.search);
-      });
+  window.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      document.querySelector("[data-mobile-menu]")?.classList.contains("is-open")
+    ) {
+      closeDrawer();
     }
-  }
+  });
 </script>

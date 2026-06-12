@@ -1,0 +1,56 @@
+---
+import SiteHeader from "../../components/SiteHeader.astro";
+import { site } from "../../data/site";
+import { getPosts, typeLabels, formatDate } from "../../lib/blog";
+import Layout from "../../layouts/Layout.astro";
+
+const posts = await getPosts();
+const title = `Blog — ${site.name}`;
+const description = "Case studies and writing on building maintainable systems.";
+---
+
+<Layout title={title} description={description}>
+  <SiteHeader />
+  <main id="main">
+    <section class="section" aria-labelledby="blog-index-title">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Blog</p>
+          <h2 id="blog-index-title">Case studies &amp; writing.</h2>
+        </div>
+        <p>Longer-form notes on the systems I build and the decisions behind them.</p>
+      </div>
+
+      <div class="post-list">
+        {
+          posts.map((post) => (
+            <a class="post-card reveal" href={`/blog/${post.id}`}>
+              <span class="type-tag">{typeLabels[post.data.type]}</span>
+              <span class="post-card-title">{post.data.title}</span>
+              <span class="post-card-desc">{post.data.description}</span>
+              <span class="post-card-date">{formatDate(post.data.pubDate)}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>{site.name} - {site.location}</p>
+  </footer>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) =>
+            entry.target.classList.toggle('is-visible', entry.isIntersecting),
+          );
+        },
+        { threshold: 0.18 },
+      );
+      document.querySelectorAll('.reveal').forEach((target) => observer.observe(target));
+    });
+  </script>
+</Layout>

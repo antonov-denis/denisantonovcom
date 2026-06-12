@@ -1,9 +1,10 @@
 ---
+import AboutSection from '../components/AboutSection.astro';
+import BlogSection from '../components/BlogSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 import ExperienceSection from '../components/ExperienceSection.astro';
 import Hero from '../components/Hero.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import ValueSection from '../components/ValueSection.astro';
 import { site } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 ---
@@ -12,8 +13,9 @@ import Layout from '../layouts/Layout.astro';
   <SiteHeader />
   <main id="main">
     <Hero />
-    <ValueSection />
+    <AboutSection />
     <ExperienceSection />
+    <BlogSection />
     <ContactSection />
   </main>
 
@@ -22,14 +24,18 @@ import Layout from '../layouts/Layout.astro';
   </footer>
 
   <script>
-    const revealTargets = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting));
-      },
-      { threshold: 0.18 },
-    );
+    // Re-runs on initial load and after every View Transition navigation.
+    document.addEventListener('astro:page-load', () => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) =>
+            entry.target.classList.toggle('is-visible', entry.isIntersecting),
+          );
+        },
+        { threshold: 0.18 },
+      );
 
-    revealTargets.forEach((target) => observer.observe(target));
+      document.querySelectorAll('.reveal').forEach((target) => observer.observe(target));
+    });
   </script>
 </Layout>
