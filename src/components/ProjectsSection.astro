@@ -1,0 +1,23 @@
+---
+import { projects } from "../data/site";
+---
+
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <div class="section-head reveal">
+    <div>
+      <p class="eyebrow">Projects</p>
+      <h2 id="projects-title">Things I run.</h2>
+    </div>
+  </div>
+
+  <div class="post-list">
+    {
+      projects.map((project) => (
+        <a class="post-card reveal" href={project.href} target="_blank" rel="noreferrer">
+          <span class="post-card-title">{project.name}</span>
+          <span class="post-card-desc">{project.description}</span>
+        </a>
+      ))
+    }
+  </div>
+</section>

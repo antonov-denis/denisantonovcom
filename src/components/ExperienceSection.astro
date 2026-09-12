@@ -1,60 +1,34 @@
 ---
 import { experience } from "../data/site";
-
-const periods = {
-  "Financial Times": {
-    range: "Jul 2025 - Present",
-    duration: "Current",
-  },
-  Intermedia: {
-    range: "Aug 2023 - Jul 2025",
-    duration: "2 yrs",
-  },
-};
 ---
 
 <section class="section" id="experience" aria-labelledby="experience-title">
   <div class="section-head reveal">
     <div>
       <p class="eyebrow">Experience</p>
-      <h2 id="experience-title">Where I have worked.</h2>
+      <h2 id="experience-title">Where I've worked.</h2>
     </div>
-    <p>
-      A concise view of my professional experience and the kind of work I
-      handled.
-    </p>
   </div>
   <div class="experience-list">
     {
-      experience.map((item) => {
-        const period = periods[item.meta as keyof typeof periods];
-
-        return (
-          <article class="experience-item reveal">
-            <div class="experience-meta">
-              <span class="experience-company">{item.meta}</span>
-              {period && (
-                <div
-                  class="experience-period"
-                  aria-label={`Period: ${period.range}`}
-                >
-                  <strong>{period.range}</strong>
-                  <em>{period.duration}</em>
-                </div>
-              )}
+      experience.map((item) => (
+        <article class="experience-item reveal">
+          <div class="experience-meta">
+            <span class="experience-company">{item.meta}</span>
+            <div class="experience-period" aria-label={`Period: ${item.range}`}>
+              <strong>{item.range}</strong>
+              <em>{item.duration}</em>
             </div>
-            <div>
-              <h3>{item.role}</h3>
-              <p>{item.body}</p>
-              <div class="chips">
-                {item.tags.map((tag) => (
-                  <span class="chip">{tag}</span>
-                ))}
-              </div>
-            </div>
-          </article>
-        );
-      })
+          </div>
+          <div>
+            <h3>{item.role}</h3>
+          </div>
+        </article>
+      ))
     }
+  </div>
+
+  <div class="section-foot reveal">
+    <p>Full detail in the <a class="inline-link" href="/resume.pdf" target="_blank">resume</a>.</p>
   </div>
 </section>

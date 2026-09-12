@@ -2,31 +2,46 @@ export const site = {
   name: "Denis Antonov",
   title: "Denis Antonov - Software Engineer",
   description:
-    "Software engineer in Sofia building maintainable product systems across services, APIs, web applications, and documentation.",
+    "Software engineer in Sofia building maintainable product systems across services, APIs, and web applications.",
   email: "antonov.denis.srs@gmail.com",
   linkedin: "https://www.linkedin.com/in/antonov-denis-srs",
   location: "Sofia, Bulgaria",
-  role: "Software Engineer at Financial Times — Sofia",
+  role: "Software engineer at the Financial Times, in Sofia.",
 };
 
 export const navItems = [
-  { href: "/#about", label: "About" },
+  { href: "/#writing", label: "Writing" },
+  { href: "/#projects", label: "Projects" },
   { href: "/#experience", label: "Experience" },
-  { href: "/blog", label: "Blog" },
   { href: "/#contact", label: "Contact" },
+];
+
+export const projects = [
+  {
+    name: "go301.link",
+    href: "https://go301.link",
+    description:
+      "A URL shortener with no accounts, no cookies, and no interstitial. Go and Postgres, running on a k3s cluster I maintain myself.",
+  },
 ];
 
 export const experience = [
   {
     meta: "Financial Times",
     role: "Software Engineer",
-    body: "Modernising legacy frontend services, designing event-driven architecture, centralising domain logic, and owning platform capabilities from discovery through rollout guidance.",
-    tags: ["TypeScript", "Express.js", "React.js", "Payload CMS", "AWS"],
+    range: "Jul 2025 - Present",
+    duration: "Current",
   },
   {
     meta: "Intermedia",
     role: "Software Engineer",
-    body: "Developed backend services and APIs for data-intensive platforms, designed SQL database structures, and built responsive client-side applications.",
-    tags: ["JavaScript", "Fastify", "React.js", "Next.js", "PostgreSQL"],
+    range: "Aug 2023 - Jun 2025",
+    duration: "1 yr 11 mos",
+  },
+  {
+    meta: "CluneTech",
+    role: "Business Representative",
+    range: "Apr 2022 - Jul 2023",
+    duration: "1 yr 4 mos",
   },
 ];
