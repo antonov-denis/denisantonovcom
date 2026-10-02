@@ -23,6 +23,12 @@ export const projects = [
     description:
       "A URL shortener with no accounts, no cookies, and no interstitial. Go and Postgres, running on a k3s cluster I maintain myself.",
   },
+  {
+    name: "ping.denisantonov.com",
+    href: "https://ping.denisantonov.com",
+    description:
+      "A small Pingdom-style uptime monitor. Go services passing probe results through Redpanda into Postgres, deployed to the same k3s cluster.",
+  },
 ];
 
 export const experience = [
